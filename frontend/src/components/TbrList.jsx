@@ -1,4 +1,3 @@
-// frontend/src/components/TbrList.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { 
@@ -17,7 +16,7 @@ export default function TbrList({ currentUser, onTranscribeToScriptorium }) {
   const [tbrBooks, setTbrBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Modal & Arama State'leri
+ 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -25,7 +24,7 @@ export default function TbrList({ currentUser, onTranscribeToScriptorium }) {
   const [selectedBook, setSelectedBook] = useState(null);
   const [priority, setPriority] = useState('Medium');
 
-  // 1. Kullanıcı Giriş Yaptığında Veritabanından TBR Listesini Çek
+  // Retrieve the TBR list from the database when the user logs in.
   useEffect(() => {
     const fetchTbr = async () => {
       if (!currentUser?.id) return;
@@ -34,7 +33,7 @@ export default function TbrList({ currentUser, onTranscribeToScriptorium }) {
         const res = await axios.get(`http://localhost:5000/api/tbr/${currentUser.id}`);
         setTbrBooks(res.data || []);
       } catch (err) {
-        console.error('TBR veritabanından alınamadı:', err);
+        console.error('TBR is not reachable by the database:', err);
       } finally {
         setIsLoading(false);
       }
@@ -42,7 +41,7 @@ export default function TbrList({ currentUser, onTranscribeToScriptorium }) {
     fetchTbr();
   }, [currentUser]);
 
-  // Open Library API Arama Tetikleyici
+  // Open Library API Search Trigger
   const handleSearchBooks = async (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
@@ -52,13 +51,13 @@ export default function TbrList({ currentUser, onTranscribeToScriptorium }) {
       const res = await axios.get(`http://localhost:5000/api/books/search?q=${encodeURIComponent(searchQuery)}`);
       setSearchResults(res.data || []);
     } catch (err) {
-      console.error('Kitap arama hatası:', err);
+      console.error('Book search error:', err);
     } finally {
       setIsSearching(false);
     }
   };
 
-  // 2. Veritabanına Yeni TBR Kitabı Ekle
+  // 2. Add a New TBR Book to the Database
   const handleAddBook = async () => {
     if (!selectedBook || !currentUser?.id) {
       alert('Please log in to inscribe quests to your scroll!');
@@ -87,7 +86,7 @@ export default function TbrList({ currentUser, onTranscribeToScriptorium }) {
     }
   };
 
-  // 3. Kitap Durumunu Döndür
+  // 3. Return Book Status
   const handleToggleStatus = async (id) => {
     const target = tbrBooks.find((b) => b.id === id);
     if (!target) return;
@@ -105,11 +104,11 @@ export default function TbrList({ currentUser, onTranscribeToScriptorium }) {
         prev.map((book) => (book.id === id ? { ...book, status: nextStatus } : book))
       );
     } catch (err) {
-      console.error('Durum veritabanında güncellenemedi:', err);
+      console.error('Status can not refresh on database:', err);
     }
   };
 
-  // 4. Kitabı Sil
+  // 4. Delete 
   const handleDeleteBook = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/api/tbr/${id}`);
@@ -119,7 +118,7 @@ export default function TbrList({ currentUser, onTranscribeToScriptorium }) {
     }
   };
 
-  // Scriptorium'a Aktarma
+  // Sealing 
   const handleSendToScriptorium = (book) => {
     if (onTranscribeToScriptorium) {
       onTranscribeToScriptorium(book);
@@ -158,12 +157,12 @@ export default function TbrList({ currentUser, onTranscribeToScriptorium }) {
       position: 'relative',
       overflow: 'hidden',
     }}>
-      {/* Peri Işıkları */}
+      {/* Fairy lights */}
       <div style={{ position: 'fixed', top: '15%', left: '8%', width: '12px', height: '12px', backgroundColor: '#fef08a', borderRadius: '50%', boxShadow: '0 0 20px 8px rgba(250, 204, 21, 0.7)', pointerEvents: 'none', zIndex: 1 }} />
       <div style={{ position: 'fixed', top: '55%', right: '10%', width: '14px', height: '14px', backgroundColor: '#c084fc', borderRadius: '50%', boxShadow: '0 0 25px 10px rgba(192, 132, 252, 0.65)', pointerEvents: 'none', zIndex: 1 }} />
 
       <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
-        {/* Başlık ve Kitap Ekle Butonu */}
+        {/* Header and book button */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <h1 style={{ fontSize: '36px', color: '#fef08a', letterSpacing: '3px', margin: 0, textShadow: '0 0 20px rgba(250, 204, 21, 0.5)' }}>
@@ -198,7 +197,7 @@ export default function TbrList({ currentUser, onTranscribeToScriptorium }) {
           </button>
         </div>
 
-        {/* Yükleniyor / Boş / Liste Durumları */}
+        {/* Loading.. */}
         {isLoading ? (
           <div style={{ textAlign: 'center', padding: '60px', color: '#c084fc' }}>
             <Loader2 size={32} className="animate-spin" style={{ margin: '0 auto 12px auto' }} />
@@ -335,7 +334,7 @@ export default function TbrList({ currentUser, onTranscribeToScriptorium }) {
         )}
       </div>
 
-      {/* ================= KİTAP EKLEME MODALI ================= */}
+      {/* ================= Book-Adding Mode ================= */}
       {isModalOpen && (
         <div 
           onClick={() => setIsModalOpen(false)}
