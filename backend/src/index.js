@@ -1,5 +1,3 @@
-// backend/src/index.js
-
 // 1. Load environment variables FIRST before anything else
 require('dotenv').config();
 
@@ -23,10 +21,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 app.use(cors());
 app.use(express.json());
 
-// KRİTİK: Express varsayılan olarak her response'a ETag ekliyor.
-// Tarayıcı bunu cache'leyip 304 Not Modified dönüyor ve GÜNCEL veri yerine
-// eski/boş cache'lenmiş cevabı kullanıyor. Tracker gibi sürekli değişen
-// veri döndüren API'lerde bu, "veri kayboluyor" gibi görünen bir bug'a yol açıyor.
+// Solvation for 304 code
 app.set('etag', false);
 
 app.use((req, res, next) => {
@@ -34,11 +29,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Helper: Kullanıcıyı ID'den bul.
-// NOT: Artık "ilk kullanıcıyı bul" fallback'i YOK. Bu fallback, userId
-// eksik/boş geldiğinde rastgele başka bir kullanıcının verisini döndürerek
-// hesaplar arası veri sızıntısına (örn. günlük okuma renklerinin karışması) yol açıyordu.
-// userId yoksa artık açıkça null döner ve ilgili route 401 ile cevap verir.
+
 const resolveUserId = (req) => {
   const headerId = req.headers['x-user-id'] || req.query.userId || req.body?.userId;
   return headerId ? String(headerId) : null;
@@ -151,9 +142,9 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
-// ================= 3. BIBI (THE LIBRARY FAIRY) CHAT & HISTORY =================
+// ================= 3. BIBI CHAT & HISTORY =================
 
-// GET: Sohbet Geçmişini Getir
+// GET
 app.get('/api/fairy/history/:userId', async (req, res) => {
   try {
     const { userId } = req.params;
@@ -167,7 +158,7 @@ app.get('/api/fairy/history/:userId', async (req, res) => {
   }
 });
 
-// POST: Mesaj Gönder, PostgreSQL'e Kaydet ve Cevapla
+// POST
 app.post('/api/fairy/chat', async (req, res) => {
   try {
     const { messages, userId } = req.body;
@@ -178,7 +169,7 @@ app.post('/api/fairy/chat', async (req, res) => {
 
     const latestUserMsg = messages[messages.length - 1];
 
-    // 1. Kullanıcı mesajını PostgreSQL'e kaydet
+    // 1. PostgreSQL save
     if (userId && latestUserMsg && latestUserMsg.sender === 'user') {
       await prisma.fairyMessage.create({
         data: {
@@ -200,7 +191,7 @@ Your personality: Gentle, enthusiastic about fantasy lore and books, wise, poeti
 Your goal: Help travelers with book recommendations across various genres (Fantasy, Sci-Fi, Gothic, Romance, Dystopian, etc.), share memorable book quotes, and encourage them on their reading journey in the valley.
 Keep your answers engaging, concise (1-3 short paragraphs max), and sprinkle in gentle magical metaphors (e.g., "by the starlight", "the scrolls whisper", "dear wanderer"). Speak in the language the user addresses you with (English or Turkish).`;
 
-    // 2. Gemini 3.6 Flash ile cevap üret
+    // 2. Gemini 3.6 Flash response
     const response = await ai.models.generateContent({
       model: 'gemini-3.6-flash',
       contents: formattedContents,
@@ -211,7 +202,7 @@ Keep your answers engaging, concise (1-3 short paragraphs max), and sprinkle in 
 
     const replyText = response.text;
 
-    // 3. Bibi'nin cevabını PostgreSQL'e kaydet
+    // 3. Save the BIBI'S answer
     if (userId && replyText) {
       await prisma.fairyMessage.create({
         data: {
@@ -492,7 +483,7 @@ app.delete('/api/tbr/:id', async (req, res) => {
 
 // ================= 7. READING TRACKER & PLAYOFFS =================
 
-// 1. Daily Heatmap Logs (Kesin Eşleşme)
+// 1. Daily Heatmap Logs 
 app.get('/api/tracker/daily', async (req, res) => {
   try {
     const userId = resolveUserId(req);
@@ -518,7 +509,7 @@ app.get('/api/tracker/daily', async (req, res) => {
   }
 });
 
-// 2. Save Daily Read Pages (Upsert Garantili Kayıt)
+// 2. Save Daily Read Pages 
 app.post('/api/tracker/daily', async (req, res) => {
   try {
     const userId = resolveUserId(req);
