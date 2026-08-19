@@ -3,7 +3,7 @@ const router = express.Router();
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-// Kullanıcının TBR listesini getir
+// User TBR list
 router.get('/:userId', async (req, res) => {
   try {
     const tbr = await prisma.tbrItem.findMany({
@@ -16,7 +16,7 @@ router.get('/:userId', async (req, res) => {
   }
 });
 
-// TBR'a kitap ekle
+// Add books to tbr
 router.post('/add', async (req, res) => {
   const { userId, title, author, coverUrl, priority, status } = req.body;
   try {
@@ -29,7 +29,7 @@ router.post('/add', async (req, res) => {
   }
 });
 
-// TBR durum güncelle
+// Reload tbr
 router.put('/status/:id', async (req, res) => {
   const { status } = req.body;
   try {
@@ -43,7 +43,7 @@ router.put('/status/:id', async (req, res) => {
   }
 });
 
-// TBR'dan sil
+// delete from the list
 router.delete('/:id', async (req, res) => {
   try {
     await prisma.tbrItem.delete({ where: { id: req.params.id } });
