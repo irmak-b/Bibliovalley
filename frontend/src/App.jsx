@@ -1,4 +1,3 @@
-// frontend/src/App.jsx
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import LandingPage from './components/LandingPage';
@@ -24,7 +23,7 @@ function App() {
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  // Sayfa açıldığında oturumu kontrol et
+  // Check the session
   useEffect(() => {
     const savedUser = localStorage.getItem('bibliovalley_user');
     if (savedUser) {
@@ -46,13 +45,7 @@ function App() {
   };
 
   const handleLogout = () => {
-    // DÜZELTME: Eskiden burada 'bibliovalley_reading_logs' (genel/sabit anahtar)
-    // temizleniyordu, ama ReadingTracker gerçek veriyi
-    // 'bibliovalley_reading_logs_<userId>' anahtarında tutuyor. Yani eski satır
-    // aslında hiçbir şeyi silmiyordu ve kafa karıştırıyordu.
-    // Şimdi, çıkış yapan kullanıcının KENDİ verisini doğru anahtarla temizliyoruz.
-    // (Bu opsiyoneldir; backend zaten tek doğru kaynak olduğu için veri kaybolmaz,
-    // sadece cihazdaki cache'i temizler.)
+  
     if (currentUser?.id) {
       localStorage.removeItem(`bibliovalley_reading_logs_${currentUser.id}`);
     }
