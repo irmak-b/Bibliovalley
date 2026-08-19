@@ -1,12 +1,11 @@
-// frontend/src/components/Map.jsx
 import React, { useRef } from 'react';
 import { BookOpen, PenTool } from 'lucide-react';
 
 const SHOPS = [
-  // ================= 1. YAZIHANE (Üstteki Su Kuyusu) =================
+  // ================= 1. Scriptorium  =================
   { id: 'yazihane', name: 'Scriptorium', x: 48, y: 15, isYazihane: true },
 
-  // ================= 2. DÜKKANLAR (Cadde Boyunca Hizalı) =================
+  // ================= 2. Shops =================
   // Sol Üst Çatı
   { id: 'fantasy', name: 'Fantasy', x: 18, y: 9 },
 
@@ -54,21 +53,21 @@ export default function Map({ onSelectShop, onOpenYazihane }) {
           overflowX: 'hidden',
         }}
       >
-        {/* Üst Karartma (Fade) */}
+        {/* Top (Fade) */}
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, height: '120px',
           background: 'linear-gradient(to bottom, #0a0512, transparent)',
           pointerEvents: 'none', zIndex: 20
         }} />
 
-        {/* Alt Karartma (Fade) */}
+        {/* Bottom (Fade) */}
         <div style={{
           position: 'fixed', bottom: 0, left: 0, right: 0, height: '120px',
           background: 'linear-gradient(to top, #0a0512, transparent)',
           pointerEvents: 'none', zIndex: 20
         }} />
 
-        {/* Harita Konteyneri */}
+        {/* Map Conteiner */}
         <div style={{
           position: 'relative',
           width: '100%',
@@ -84,7 +83,7 @@ export default function Map({ onSelectShop, onOpenYazihane }) {
             style={{ width: '100%', height: 'auto', display: 'block' }}
           />
 
-        {/* Butonlar */}
+        {/* Buttons */}
         {SHOPS.map((shop) => (
           <button
             key={shop.id}
