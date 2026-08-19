@@ -27,11 +27,11 @@ Also The Reading Tracker holds a schedule for to track your daily reading log. Y
 **1. Technology-Stack**
 
 ***Frontend***
-*React.js: Component based SPA Architecture,
-*Vite: Fast compiling and development,
-*Axios: REST API HTTP Client,
-*Lucide React: Icon Set,
-*CSS-in-JS:RPG/Cinzel based UI,
+*React.js: Component based SPA Architecture <br>
+*Vite: Fast compiling and development <br> 
+*Axios: REST API HTTP Client <br>
+*Lucide React: Icon Set <br>
+*CSS-in-JS:RPG/Cinzel based UI 
 
 ***Backend***
 *Node.js & Express.js:RESTFUL API Server and Migration management 
