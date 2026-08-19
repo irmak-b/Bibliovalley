@@ -1,4 +1,3 @@
-// frontend/src/components/ParchmentView.jsx
 import React, { useState } from 'react';
 import { Star, X } from 'lucide-react';
 import { getThemeByGenre } from '../config/parchmentThemes';
@@ -35,7 +34,7 @@ export default function ParchmentView({ parchment, onClose }) {
         padding: '20px',
       }}
     >
-      {/* PARŞÖMEN KONTEYNERİ */}
+      {/* Parch container */}
       <div 
         onClick={(e) => e.stopPropagation()}
         style={{
@@ -55,7 +54,7 @@ export default function ParchmentView({ parchment, onClose }) {
           boxSizing: 'border-box',
         }}
       >
-        {/* Kapat Butonu */}
+        {/* Closing */}
         <button 
           onClick={onClose}
           style={{
@@ -79,7 +78,7 @@ export default function ParchmentView({ parchment, onClose }) {
           <X size={22} />
         </button>
 
-        {/* SOL SAYFA */}
+        {/* Left Page */}
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
             <img 
@@ -156,7 +155,7 @@ export default function ParchmentView({ parchment, onClose }) {
           </div>
         </div>
 
-        {/* SAĞ SAYFA */}
+        {/* Right Page */}
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '360px', overflowY: 'auto' }}>
             {quotesList.length > 0 ? (
@@ -194,7 +193,7 @@ export default function ParchmentView({ parchment, onClose }) {
             )}
           </div>
 
-          {/* Favori Bölümler Tablosu */}
+          {/* Fav chaps (to be developed) */}
           <div style={{ marginTop: 'auto' }}>
             <div style={{
               backgroundColor: theme.tableBg,
