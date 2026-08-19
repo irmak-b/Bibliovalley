@@ -26,21 +26,21 @@ Also The Reading Tracker holds a schedule for to track your daily reading log. Y
 
 **1. Technology-Stack**
 
-***Frontend***
+***Frontend*** <br>
 *React.js: Component based SPA Architecture <br>
 *Vite: Fast compiling and development <br> 
 *Axios: REST API HTTP Client <br>
 *Lucide React: Icon Set <br>
 *CSS-in-JS:RPG/Cinzel based UI 
 
-***Backend***
-*Node.js & Express.js:RESTFUL API Server and Migration management 
-*PostgreSQL:Database
-*Prisma ORM:Type-safe database modeling and migration management
-*@google/genai: Gemini AI SDK
-*CORS & Dotenv:Safety and variables
+***Backend*** <br>
+*Node.js & Express.js:RESTFUL API Server and Migration management <br>
+*PostgreSQL:Database <br>
+*Prisma ORM:Type-safe database modeling and migration management <br>
+*@google/genai: Gemini AI SDK <br>
+*CORS & Dotenv:Safety and variables 
 
-***External Services***
+***External Services*** <br>
 *Open Library API
 
 **2. Prisma Database Models**
@@ -58,37 +58,37 @@ Also The Reading Tracker holds a schedule for to track your daily reading log. Y
 
 ***3. Backend API Endpoint List***
 
-System and Authorization:
-*GET /api/test-db -> PostgreSQL Data Control
-*POST /api/auth/register -> New Wanderer Registration
-*POST /api/auth/login -> Sign, Login
+System and Authorization: <br>
+*GET /api/test-db -> PostgreSQL Data Control <br>
+*POST /api/auth/register -> New Wanderer Registration <br>
+*POST /api/auth/login -> Sign, Login <br>
 
-BIBI:
-*GET /api/fairy/history/:userId -> Brings user's chat with fairy
-*POST /api/fairy/chat -> Chat organization
+BIBI: <br>
+*GET /api/fairy/history/:userId -> Brings user's chat with fairy <br>
+*POST /api/fairy/chat -> Chat organization <br>
 
-Open Library Proxy:
-*GET /api/books/search?q={query} -> Searches on Open Library and gathers the data
+Open Library Proxy: <br>
+*GET /api/books/search?q={query} -> Searches on Open Library and gathers the data <br>
 
-Scriptorium, Parchments and Map:
-*POST /api/parchments -> Linkes the parchment
-*GET /api/shops/:genre/parchments -> Brings the parchments to the related genre shops 
-*DELETE /api/parchments/:id -> Deletes the parchments 
+Scriptorium, Parchments and Map: <br>
+*POST /api/parchments -> Linkes the parchment <br>
+*GET /api/shops/:genre/parchments -> Brings the parchments to the related genre shops  <br>
+*DELETE /api/parchments/:id -> Deletes the parchments <br>
 
-TBR Scroll:
-*GET /api/tbr/:userId -> Brings TBR queue 
-*POST /api/tbr/add -> Adds the searched book to the queue due to its priority 
-*PUT /api/tbr/status/:id -> Organized the book status : Queue → Reading → Completed 
-*DELETE /api/tbr/:id -> Deletes book from the list 
+TBR Scroll: <br>
+*GET /api/tbr/:userId -> Brings TBR queue <br>
+*POST /api/tbr/add -> Adds the searched book to the queue due to its priority <br>
+*PUT /api/tbr/status/:id -> Organized the book status : Queue → Reading → Completed <br>
+*DELETE /api/tbr/:id -> Deletes book from the list <br>
 
-Reading Tracker and Playoffs:
-*GET /api/tracker/:userId — Returns all books on the shelves for the 12-month period
-*POST /api/tracker/add — Places a new book on the shelf for the relevant month
-*PUT /api/tracker/favorite — Points the best book of the month as the "Champion" (Playoff contender)
-*GET /api/tracker/daily — Returns the user's daily page-reading logs for the calendar heatmap
-*POST /api/tracker/daily — Updates the page count for the day clicked on the calendar
+Reading Tracker and Playoffs:<br>
+*GET /api/tracker/:userId — Returns all books on the shelves for the 12-month period <br>
+*POST /api/tracker/add — Places a new book on the shelf for the relevant month <br>
+*PUT /api/tracker/favorite — Points the best book of the month as the "Champion" (Playoff contender) <br>
+*GET /api/tracker/daily — Returns the user's daily page-reading logs for the calendar heatmap <br>
+*POST /api/tracker/daily — Updates the page count for the day clicked on the calendar <br>
 
-Shop & Type Matching (11 Map Zone):
+Shop & Type Matching (11 Map Zone): <br>
 fantasy, scifi, romance, horror, mystery, historical, dystopian, classics, gothic, ya (Young Adult), mythology
 
 
