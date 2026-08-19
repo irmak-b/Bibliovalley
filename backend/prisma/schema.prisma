@@ -1,0 +1,108 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  username     String        @unique
+  password     String
+  guildClass   String?       @default("Valley Scribe")
+  createdAt    DateTime      @default(now())
+
+  shops        Shop[]
+  parchments   Parchment[]
+  tbrItems     TbrItem[]
+  dailyLogs    DailyLog[]
+  monthlyBooks MonthlyBook[]
+  fairyMessages FairyMessage[]
+}
+
+model Shop {
+  id         String      @id @default(uuid())
+  genre      String
+  positionX  Float
+  positionY  Float
+  userId     String
+  user       User        @relation(fields: [userId], references: [id])
+  parchments Parchment[]
+  createdAt  DateTime    @default(now())
+}
+
+model Parchment {
+  id         String   @id @default(uuid())
+  title      String
+  author     String
+  coverUrl   String?
+  rating     Int      @default(5)
+  thoughts   String?
+  quotes     String?
+  externalId String?
+  pages      Int?
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  shopId     String
+  shop       Shop     @relation(fields: [shopId], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+// Yeni: TBR İstek Listesi Tablosu
+model TbrItem {
+  id          String   @id @default(uuid())
+  title       String
+  author      String
+  coverUrl    String?
+  externalId  String?
+  pages       Int?
+  priority    String   @default("medium") // high, medium, low
+  status      String   @default("queue")  // queue, reading, completed
+  targetGenre String   @default("fantasy")
+  notes       String?
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+// Yeni: Takvim Günlük Sayfa Takip Tablosu
+model DailyLog {
+  id        String   @id @default(uuid())
+  day       Int      // 1 - 31
+  month     Int      // 1 - 12
+  year      Int      // 2026
+  pages     Int      @default(0)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, year, month, day])
+}
+
+// Yeni: Aylık Raflar & Playoff Adayı Tablosu
+model MonthlyBook {
+  id         String   @id @default(uuid())
+  month      String   // 'January', 'February' vb.
+  year       Int      @default(2026)
+  title      String
+  author     String
+  coverUrl   String?
+  rating     Int      @default(5)
+  pages      Int      @default(0)
+  isFavorite Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+model FairyMessage {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sender    String   // 'user' veya 'fairy'
+  text      String
+  createdAt DateTime @default(now())
+}
