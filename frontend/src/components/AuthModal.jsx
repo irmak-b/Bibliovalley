@@ -1,4 +1,3 @@
-// frontend/src/components/AuthModal.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import { X, Sparkles, KeyRound, Shield, Feather, BookOpen, Loader2 } from 'lucide-react';
@@ -68,7 +67,7 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess }) {
         boxShadow: '0 25px 60px rgba(0,0,0,0.9), 0 0 35px rgba(250, 204, 21, 0.25)',
         position: 'relative'
       }}>
-        {/* Kapat Butonu */}
+        {/* Close button */}
         <button
           onClick={onClose}
           style={{
@@ -84,7 +83,7 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess }) {
           <X size={22} />
         </button>
 
-        {/* Başlık & İkon */}
+        {/* Header and Icons */}
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>
           <div style={{
             width: '54px',
@@ -108,7 +107,7 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess }) {
           </p>
         </div>
 
-        {/* Hata Mesajı */}
+        {/* Error message */}
         {errorMsg && (
           <div style={{
             backgroundColor: 'rgba(239, 68, 68, 0.15)',
@@ -124,7 +123,7 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess }) {
           </div>
         )}
 
-        {/* RPG Kayıt Formu */}
+        {/* RPG Register*/}
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           
           <div>
@@ -201,7 +200,7 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess }) {
             />
           </div>
 
-          {/* RPG Sınıf Seçimi (Sadece Kayıtta) */}
+          {/* RPG class selection */}
           {isRegister && (
             <div style={{ marginTop: '4px' }}>
               <label style={{ fontSize: '11px', color: '#c084fc', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>
@@ -261,7 +260,7 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess }) {
           </button>
         </form>
 
-        {/* Geçiş Butonu */}
+        {/* Jump button */}
         <div style={{ textAlign: 'center', marginTop: '18px', fontSize: '12px', color: '#94a3b8' }}>
           {isRegister ? 'Already inscribed in the scrolls?' : 'A new traveler upon the path?'}{' '}
           <button
