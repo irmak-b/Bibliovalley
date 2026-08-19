@@ -1,10 +1,9 @@
-// backend/routes/trackerRoutes.js
 const express = require('express');
 const router = express.Router();
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-// 1. GET /api/tracker/:userId - Kullanıcının kitaplarını getir
+// 1. GET /api/tracker/:userId - bring users book
 router.get('/:userId', async (req, res) => {
   try {
     const logs = await prisma.readingLog.findMany({
@@ -17,7 +16,7 @@ router.get('/:userId', async (req, res) => {
   }
 });
 
-// 2. POST /api/tracker/add - Yeni kitap ekle
+// 2. POST /api/tracker/add - add new books
 router.post('/add', async (req, res) => {
   const { userId, month, title, author, coverUrl, pages, rating, isFavorite } = req.body;
   try {
@@ -40,17 +39,17 @@ router.post('/add', async (req, res) => {
   }
 });
 
-// 3. PUT /api/tracker/favorite - Ayın şampiyonunu güncelle
+// 3. PUT /api/tracker/favorite - reload the champ
 router.put('/favorite', async (req, res) => {
   const { id, month, userId } = req.body;
   try {
-    // Aynı ay içindeki diğer kitapların şampiyonluğunu sıfırla
+    
     await prisma.readingLog.updateMany({
       where: { userId, month },
       data: { isFavorite: false },
     });
 
-    // Seçilen kitabı şampiyon yap
+   
     const updated = await prisma.readingLog.update({
       where: { id },
       data: { isFavorite: true },
