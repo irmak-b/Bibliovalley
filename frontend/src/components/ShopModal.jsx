@@ -1,4 +1,3 @@
-// frontend/src/components/ShopModal.jsx
 import React, { useEffect, useState } from 'react';
 import { X, Book, Sparkles, Trash2 } from 'lucide-react';
 import axios from 'axios';
@@ -21,7 +20,7 @@ export default function ShopModal({ isOpen, shop, onClose, onSelectParchment , c
       });
       setParchments(res.data || []);
     } catch (err) {
-      console.error('Parşömenler alınamadı:', err);
+      console.error('Parchments are missing:', err);
     }
   };
   fetchParchments();
@@ -39,7 +38,7 @@ export default function ShopModal({ isOpen, shop, onClose, onSelectParchment , c
     }
   };
 
-  // Parşömen Silme Fonksiyonu
+  // Delete parchments
   const handleDeleteParchment = async (e, parchmentId, title) => {
     e.stopPropagation(); // Kitabın açılmasını engelle
     if (!window.confirm(`"${title}" Are you sure you want to burn/erase your parchment??`)) return;
@@ -98,7 +97,7 @@ export default function ShopModal({ isOpen, shop, onClose, onSelectParchment , c
           </button>
         </div>
 
-        {/* Ahşap Raf İçeriği */}
+        {/* Shelf  */}
         <div style={{ padding: '40px 30px', backgroundColor: '#0c0a09', minHeight: '320px' }}>
           
           {loading ? (
@@ -111,7 +110,7 @@ export default function ShopModal({ isOpen, shop, onClose, onSelectParchment , c
             </div>
           ) : (
             <div style={{ position: 'relative' }}>
-              {/* Kitap Sırtları */}
+              {/* Book spine */}
               <div style={{
                 display: 'flex',
                 alignItems: 'flex-end',
@@ -127,7 +126,7 @@ export default function ShopModal({ isOpen, shop, onClose, onSelectParchment , c
                       key={p.id}
                       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}
                     >
-                      {/* Silme Butonu */}
+                      {/* Delete button */}
                       <button
                         onClick={(e) => handleDeleteParchment(e, p.id, p.title)}
                         style={{
@@ -149,7 +148,7 @@ export default function ShopModal({ isOpen, shop, onClose, onSelectParchment , c
                         <Trash2 size={12} />
                       </button>
 
-                      {/* Kitap Sırtı */}
+                      {/* Spine */}
                       <div
                         onClick={() => onSelectParchment({ ...p, shopGenre: shop.id })}
                         style={{
@@ -187,7 +186,7 @@ export default function ShopModal({ isOpen, shop, onClose, onSelectParchment , c
                 })}
               </div>
 
-              {/* Ahşap Raf Tabanı */}
+              {/* Bottom of the shelf */}
               <div style={{
                 height: '16px',
                 backgroundColor: '#78350f',
