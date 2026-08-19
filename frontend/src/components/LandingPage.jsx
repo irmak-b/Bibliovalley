@@ -1,4 +1,3 @@
-// frontend/src/components/LandingPage.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { 
@@ -31,7 +30,7 @@ export default function LandingPage({ currentUser, onEnterValley, onNavigate }) 
   const [inputMessage, setInputMessage] = useState('');
   const chatEndRef = useRef(null);
 
-  // 1. Kullanıcının PostgreSQL'deki sohbet geçmişini çek
+  // 1. Retrieve the user's chat history
   useEffect(() => {
     const fetchChatHistory = async () => {
       if (!currentUser?.id) return;
@@ -41,13 +40,13 @@ export default function LandingPage({ currentUser, onEnterValley, onNavigate }) 
           setMessages(res.data);
         }
       } catch (err) {
-        console.error('Bibi geçmişi yüklenemedi:', err);
+        console.error('Bibi history could not be loaded.:', err);
       }
     };
     fetchChatHistory();
   }, [currentUser]);
 
-  // Otomatik aşağı kaydırma
+  // Oto scroll
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading, showAiChat]);
@@ -77,7 +76,7 @@ export default function LandingPage({ currentUser, onEnterValley, onNavigate }) 
         ]);
       }
     } catch (err) {
-      console.error('❌ Bibi Chat Hatası:', err);
+      console.error('❌ Bibi Chat Error:', err);
       setMessages((prev) => [
         ...prev,
         {
@@ -97,7 +96,7 @@ export default function LandingPage({ currentUser, onEnterValley, onNavigate }) 
     }
   };
 
-  // Geçmiş içinde arama filtrelemesi
+  // Search filter
   const filteredHistory = messages.filter((m) =>
     m.text.toLowerCase().includes(historySearchQuery.toLowerCase())
   );
@@ -113,7 +112,7 @@ export default function LandingPage({ currentUser, onEnterValley, onNavigate }) 
       position: 'relative'
     }}>
       
-      {/* ================= TOOLTIP & PARILTI CSS STİLLERİ ================= */}
+      {/* ================= TOOLTIP & CSS STİLS ================= */}
       <style>{`
         .bibi-container:hover .bibi-tooltip {
           opacity: 1 !important;
@@ -157,13 +156,13 @@ export default function LandingPage({ currentUser, onEnterValley, onNavigate }) 
           pointerEvents: 'none'
         }} />
 
-        {/* Peri Işıkları */}
+        {/* Fairy Lights */}
         <div className="fairy-light" style={{ top: '22%', left: '48%', zIndex: 3, animationDelay: '0s' }} />
         <div className="fairy-light" style={{ top: '35%', left: '26%', zIndex: 3, animationDelay: '1.2s' }} />
         <div className="fairy-light" style={{ top: '28%', left: '72%', zIndex: 3, animationDelay: '2.4s' }} />
         <div className="fairy-light" style={{ top: '48%', left: '56%', zIndex: 3, animationDelay: '0.8s' }} />
 
-        {/* Hero Başlık */}
+        {/* Hero Header */}
         <div style={{ textAlign: 'center', zIndex: 4, position: 'relative', maxWidth: '800px' }}>
           <h1 style={{
             fontSize: 'clamp(32px, 6vw, 56px)',
@@ -191,7 +190,7 @@ export default function LandingPage({ currentUser, onEnterValley, onNavigate }) 
         </div>
       </section>
 
-      {/* 2. ÖZELLİK TANITIMLARI */}
+      {/* 2. Features */}
       <div style={{
         background: 'linear-gradient(180deg, #0a0512 0%, #1f0b38 40%, #2e1065 60%, #0a0512 100%)',
         padding: '100px 20px',
@@ -439,7 +438,7 @@ export default function LandingPage({ currentUser, onEnterValley, onNavigate }) 
         alignItems: 'flex-end'
       }}>
         
-        {/* Sohbet Kutusu */}
+        {/* Chat Box */}
         {showAiChat && (
           <div style={{
             marginBottom: '14px',
@@ -475,7 +474,7 @@ export default function LandingPage({ currentUser, onEnterValley, onNavigate }) 
               </div>
               
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                {/* Tüm Geçmişi Görüntüleme Butonu */}
+                {/* History Button */}
                 <button
                   onClick={() => setShowHistoryModal(true)}
                   title="View Lore Chronicles (Full History)"
@@ -504,7 +503,7 @@ export default function LandingPage({ currentUser, onEnterValley, onNavigate }) 
               </div>
             </div>
 
-            {/* Mesaj Listesi */}
+            {/* Messages */}
             <div style={{
               padding: '14px',
               height: '250px',
@@ -593,7 +592,7 @@ export default function LandingPage({ currentUser, onEnterValley, onNavigate }) 
           </div>
         )}
 
-        {/* Kayan Bibi Butonu & Tooltip */}
+        {/* Bibi Button and Tooltip */}
         <div
           className="bibi-container"
           style={{
@@ -717,7 +716,7 @@ export default function LandingPage({ currentUser, onEnterValley, onNavigate }) 
               </button>
             </div>
 
-            {/* Arama Barı */}
+            {/* Search Bar */}
             <div style={{ padding: '12px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', gap: '10px' }}>
               <div style={{
                 flex: 1,
@@ -747,7 +746,7 @@ export default function LandingPage({ currentUser, onEnterValley, onNavigate }) 
               </div>
             </div>
 
-            {/* Mesaj Akışı */}
+            {/* Msg stream */}
             <div style={{
               flex: 1,
               padding: '20px',
