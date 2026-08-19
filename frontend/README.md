@@ -25,20 +25,23 @@ Also The Reading Tracker holds a schedule for to track your daily reading log. Y
 ## Architecture and Technology Breakdown of Bibliovalley ##
 
 **1. Technology-Stack**
+
 ***Frontend***
-React.js: Component based SPA Architecture 
-Vite: Fast compiling and development
-Axios: REST API HTTP Client
-Lucide React: Icon Set
-CSS-in-JS:RPG/Cinzel based UI
+*React.js: Component based SPA Architecture 
+*Vite: Fast compiling and development
+*Axios: REST API HTTP Client
+*Lucide React: Icon Set
+*CSS-in-JS:RPG/Cinzel based UI
+
 ***Backend***
-Node.js & Express.js:RESTFUL API Server and Migration management 
-PostgreSQL:Database
-Prisma ORM:Type-safe database modeling and migration management
-@google/genai: Gemini AI SDK
-CORS & Dotenv:Safety and variables
+*Node.js & Express.js:RESTFUL API Server and Migration management 
+*PostgreSQL:Database
+*Prisma ORM:Type-safe database modeling and migration management
+*@google/genai: Gemini AI SDK
+*CORS & Dotenv:Safety and variables
+
 ***External Services***
-Open Library API
+*Open Library API
 
 **2. Prisma Database Models**
 
@@ -56,34 +59,34 @@ Open Library API
 ***3. Backend API Endpoint List***
 
 System and Authorization:
-GET /api/test-db -> PostgreSQL Data Control
-POST /api/auth/register -> New Wanderer Registration
-POST /api/auth/login -> Sign, Login
+*GET /api/test-db -> PostgreSQL Data Control
+*POST /api/auth/register -> New Wanderer Registration
+*POST /api/auth/login -> Sign, Login
 
 BIBI:
-GET /api/fairy/history/:userId -> Brings user's chat with fairy
-POST /api/fairy/chat -> Chat organization
+*GET /api/fairy/history/:userId -> Brings user's chat with fairy
+*POST /api/fairy/chat -> Chat organization
 
 Open Library Proxy:
-GET /api/books/search?q={query} -> Searches on Open Library and gathers the data
+*GET /api/books/search?q={query} -> Searches on Open Library and gathers the data
 
 Scriptorium, Parchments and Map:
-POST /api/parchments -> Linkes the parchment
-GET /api/shops/:genre/parchments -> Brings the parchments to the related genre shops 
-DELETE /api/parchments/:id -> Deletes the parchments 
+*POST /api/parchments -> Linkes the parchment
+*GET /api/shops/:genre/parchments -> Brings the parchments to the related genre shops 
+*DELETE /api/parchments/:id -> Deletes the parchments 
 
 TBR Scroll:
-GET /api/tbr/:userId -> Brings TBR queue 
-POST /api/tbr/add -> Adds the searched book to the queue due to its priority 
-PUT /api/tbr/status/:id -> Organized the book status : Queue → Reading → Completed 
-DELETE /api/tbr/:id -> Deletes book from the list 
+*GET /api/tbr/:userId -> Brings TBR queue 
+*POST /api/tbr/add -> Adds the searched book to the queue due to its priority 
+*PUT /api/tbr/status/:id -> Organized the book status : Queue → Reading → Completed 
+*DELETE /api/tbr/:id -> Deletes book from the list 
 
 Reading Tracker and Playoffs:
-GET /api/tracker/:userId — Returns all books on the shelves for the 12-month period
-POST /api/tracker/add — Places a new book on the shelf for the relevant month
-PUT /api/tracker/favorite — Points the best book of the month as the "Champion" (Playoff contender)
-GET /api/tracker/daily — Returns the user's daily page-reading logs for the calendar heatmap
-POST /api/tracker/daily — Updates the page count for the day clicked on the calendar
+*GET /api/tracker/:userId — Returns all books on the shelves for the 12-month period
+*POST /api/tracker/add — Places a new book on the shelf for the relevant month
+*PUT /api/tracker/favorite — Points the best book of the month as the "Champion" (Playoff contender)
+*GET /api/tracker/daily — Returns the user's daily page-reading logs for the calendar heatmap
+*POST /api/tracker/daily — Updates the page count for the day clicked on the calendar
 
 Shop & Type Matching (11 Map Zone):
 fantasy, scifi, romance, horror, mystery, historical, dystopian, classics, gothic, ya (Young Adult), mythology
