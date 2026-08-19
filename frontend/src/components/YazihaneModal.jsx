@@ -1,4 +1,3 @@
-// frontend/src/components/YazihaneModal.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { X, Search, Sparkles, Loader2, BookOpen } from 'lucide-react';
@@ -39,7 +38,7 @@ export default function YazihaneModal({ isOpen, onClose, initialBook, currentUse
         pages: initialBook.pages || null,
       });
 
-      // Target genre eşleşmesi
+      // Target genre match
       if (initialBook.targetGenre) {
         const found = VALLEY_GENRES.find(
           g => g.name.toLowerCase() === initialBook.targetGenre.toLowerCase() || g.id === initialBook.targetGenre.toLowerCase()
@@ -60,7 +59,7 @@ export default function YazihaneModal({ isOpen, onClose, initialBook, currentUse
       const res = await axios.get(`http://localhost:5000/api/books/search?q=${encodeURIComponent(searchQuery)}`);
       setSearchResults(res.data || []);
     } catch (err) {
-      console.error('Arama hatası:', err);
+      console.error('Searcing error:', err);
     } finally {
       setIsSearching(false);
     }
@@ -82,15 +81,15 @@ export default function YazihaneModal({ isOpen, onClose, initialBook, currentUse
       });
 
       if (res.data && res.data.success) {
-        alert('✨ Parşömen başarıyla mühürlendi ve dükkana eklendi!');
+        alert('✨ The parchment has been successfully sealed and added to the shop!');
         setSelectedBook(null);
         setThoughts('');
         setQuotes('');
         onClose();
       }
     } catch (err) {
-      console.error('Parşömen mühürleme hatası:', err);
-      alert('Parşömen mühürlenirken bir hata oluştu: ' + (err.response?.data?.error || err.message));
+      console.error('Sealing error:', err);
+      alert('An error occured while loading ' + (err.response?.data?.error || err.message));
     } finally {
       setIsSaving(false);
     }
@@ -134,7 +133,7 @@ export default function YazihaneModal({ isOpen, onClose, initialBook, currentUse
           </button>
         </div>
 
-        {/* 1. KİTAP SEÇİLİ DEĞİLSE ARAMA FORMU */}
+        {/* 1. SEARCH FORM IF NO BOOK IS SELECTED */}
         {!selectedBook ? (
           <div>
             <form onSubmit={handleSearch} style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
@@ -203,7 +202,7 @@ export default function YazihaneModal({ isOpen, onClose, initialBook, currentUse
             </div>
           </div>
         ) : (
-          /* 2. KİTAP SEÇİLİ OLDUĞUNDA MÜHÜRLEME FORMU */
+          /* 2. STAMPING FORM FOR SELECTED BOOK */
           <form onSubmit={handleSealParchment} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{
               display: 'flex',
