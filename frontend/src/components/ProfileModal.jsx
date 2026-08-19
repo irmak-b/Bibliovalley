@@ -1,4 +1,3 @@
-// frontend/src/components/ProfileModal.jsx
 import React from 'react';
 import { X, Shield, Feather, BookOpen, LogOut, Sparkles, Scroll, Award } from 'lucide-react';
 
@@ -36,7 +35,7 @@ export default function ProfileModal({ isOpen, onClose, user, onLogout }) {
         boxShadow: '0 25px 60px rgba(0,0,0,0.9), 0 0 30px rgba(250, 204, 21, 0.2)',
         position: 'relative',
       }}>
-        {/* Kapat Butonu */}
+        {/* Close button */}
         <button
           onClick={onClose}
           style={{
@@ -52,7 +51,7 @@ export default function ProfileModal({ isOpen, onClose, user, onLogout }) {
           <X size={20} />
         </button>
 
-        {/* Profil Başlığı & Avatar */}
+        {/* Profile header and icon */}
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>
           <div style={{
             width: '68px',
@@ -89,7 +88,7 @@ export default function ProfileModal({ isOpen, onClose, user, onLogout }) {
           </div>
         </div>
 
-        {/* Lonca Künyesi Bilgileri */}
+        {/* Profile information */}
         <div style={{
           backgroundColor: 'rgba(10, 5, 18, 0.6)',
           border: '1px solid rgba(124, 58, 237, 0.3)',
@@ -110,7 +109,7 @@ export default function ProfileModal({ isOpen, onClose, user, onLogout }) {
           </div>
         </div>
 
-        {/* Aksiyon Butonları */}
+        {/* Action buttons */}
         <div style={{ display: 'flex', gap: '10px' }}>
           <button
             onClick={() => {
