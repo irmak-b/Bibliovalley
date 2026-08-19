@@ -51,7 +51,6 @@ model Parchment {
   createdAt  DateTime @default(now())
 }
 
-// Yeni: TBR İstek Listesi Tablosu
 model TbrItem {
   id          String   @id @default(uuid())
   title       String
@@ -68,7 +67,6 @@ model TbrItem {
   createdAt   DateTime @default(now())
 }
 
-// Yeni: Takvim Günlük Sayfa Takip Tablosu
 model DailyLog {
   id        String   @id @default(uuid())
   day       Int      // 1 - 31
@@ -82,7 +80,6 @@ model DailyLog {
   @@unique([userId, year, month, day])
 }
 
-// Yeni: Aylık Raflar & Playoff Adayı Tablosu
 model MonthlyBook {
   id         String   @id @default(uuid())
   month      String   // 'January', 'February' vb.
