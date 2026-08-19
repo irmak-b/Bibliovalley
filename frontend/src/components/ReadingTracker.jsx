@@ -1,4 +1,3 @@
-// frontend/src/components/ReadingTracker.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toPng } from 'html-to-image';
