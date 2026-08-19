@@ -1,4 +1,3 @@
-// frontend/src/components/Playoffs.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Trophy, CheckCircle, RotateCcw, Loader2 } from 'lucide-react';
@@ -16,7 +15,7 @@ export default function Playoffs({ currentUser }) {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  // 12 Aylık Aday Kitaplar (Başlangıçta hepsi null)
+  // 12 Month 
   const [nominees, setNominees] = useState({
     January: null,
     February: null,
@@ -32,7 +31,7 @@ export default function Playoffs({ currentUser }) {
     December: null,
   });
 
-  // Turnuva Aşamaları State'leri (Kullanıcıya özel LocalStorage ile korunur)
+  // Tornament 
   const [seasonWinners, setSeasonWinners] = useState(() => {
     try {
       const saved = localStorage.getItem(`${playoffsKey}_seasons`);
@@ -60,7 +59,7 @@ export default function Playoffs({ currentUser }) {
     }
   });
 
-  // 1. O anki giriş yapmış kullanıcının Reading Tracker şampiyonlarını veritabanından çek
+ 
   useEffect(() => {
     const fetchNominees = async () => {
       if (!currentUser?.id) {
@@ -84,7 +83,7 @@ export default function Playoffs({ currentUser }) {
           September: null, October: null, November: null, December: null,
         };
 
-        // Veritabanında isFavorite: true olan kitapları ilgili aya yerleştir
+        // Database isFavorite
         books.forEach((book) => {
           if (book.isFavorite && newNominees.hasOwnProperty(book.month)) {
             newNominees[book.month] = book;
@@ -102,7 +101,7 @@ export default function Playoffs({ currentUser }) {
     fetchNominees();
   }, [currentUser]);
 
-  // Turnuva seçimlerini kullanıcı bazında kaydet
+
   useEffect(() => {
     localStorage.setItem(`${playoffsKey}_seasons`, JSON.stringify(seasonWinners));
   }, [seasonWinners, playoffsKey]);
@@ -115,7 +114,7 @@ export default function Playoffs({ currentUser }) {
     localStorage.setItem(`${playoffsKey}_grand`, JSON.stringify(grandChampion));
   }, [grandChampion, playoffsKey]);
 
-  // Sezon kazananı seçme
+
   const handleSelectSeasonWinner = (seasonId, monthKey) => {
     const book = nominees[monthKey];
     if (!book) return;
@@ -126,14 +125,13 @@ export default function Playoffs({ currentUser }) {
     setGrandChampion(null);
   };
 
-  // Yarı final kazananı seçme
   const handleSelectSemiWinner = (semiSlot, book) => {
     if (!book) return;
     setSemiWinners((prev) => ({ ...prev, [semiSlot]: book }));
     setGrandChampion(null);
   };
 
-  // Turnuvayı Sıfırla
+  // Reset button
   const handleResetTournament = () => {
     setSeasonWinners({ winter: null, spring: null, summer: null, autumn: null });
     setSemiWinners({ semi1: null, semi2: null });
