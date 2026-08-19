@@ -1,4 +1,3 @@
-// frontend/src/components/Navbar.jsx
 import React, { useState } from 'react';
 import { 
   Compass, 
@@ -41,7 +40,7 @@ export default function Navbar({ onNavigate, activeTab, onOpenProfile }) {
       // Arka plan rengi veya gölge (box-shadow) tamamen kaldırıldı
     }}>
       
-      {/* SOL: LOGO (Temiz ve Şeffaf) */}
+      {/* LOGO ) */}
       <div 
         onClick={() => handleItemClick('landing')}
         style={{
@@ -52,7 +51,7 @@ export default function Navbar({ onNavigate, activeTab, onOpenProfile }) {
           userSelect: 'none'
         }}
       >
-        {/* Sade Logo İkonu */}
+        {/* Logo */}
         <Sparkles size={24} color="#fef08a" style={{ filter: 'drop-shadow(0 0 8px rgba(250, 204, 21, 0.6))' }} />
         <span style={{
           fontSize: '20px',
@@ -66,10 +65,10 @@ export default function Navbar({ onNavigate, activeTab, onOpenProfile }) {
         </span>
       </div>
 
-      {/* SAĞ ORTA: MASAÜSTÜ LİNKLERİ (Buton değil, temiz metin) */}
+      {/* linkes */}
       <div style={{
         display: 'flex',
-        gap: '32px', // Linkler arası geniş boşluk
+        gap: '32px', 
         alignItems: 'center',
       }} className="desktop-nav">
         {navItems.map((item) => {
@@ -79,7 +78,7 @@ export default function Navbar({ onNavigate, activeTab, onOpenProfile }) {
               key={item.id}
               onClick={() => handleItemClick(item.id)}
               style={{
-                color: isActive ? '#fef08a' : '#e2e8f0', // Aktifken sarımsı, değilken açık gri/beyaz
+                color: isActive ? '#fef08a' : '#e2e8f0', 
                 fontSize: '14px',
                 fontWeight: isActive ? '600' : '400',
                 letterSpacing: '1px',
@@ -102,7 +101,7 @@ export default function Navbar({ onNavigate, activeTab, onOpenProfile }) {
           );
         })}
         
-        {/* Temiz Profil İkonu */}
+        {/* Profile */}
         <User 
           size={20} 
           color="#e2e8f0" 
@@ -113,7 +112,7 @@ export default function Navbar({ onNavigate, activeTab, onOpenProfile }) {
         />
       </div>
 
-      {/* MOBİL: SADECE HAMBURGER İKONU */}
+      {/* MOBİL (Burger)*/}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         className="mobile-menu-btn"
@@ -130,7 +129,7 @@ export default function Navbar({ onNavigate, activeTab, onOpenProfile }) {
         {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
-      {/* MOBİL AÇILIR MENÜ (Koyu/Bulanık zemin üstüne düşer) */}
+      {/* Mobil opener */}
       {isMobileMenuOpen && (
         <div style={{
           position: 'absolute',
@@ -172,7 +171,7 @@ export default function Navbar({ onNavigate, activeTab, onOpenProfile }) {
         </div>
       )}
 
-      {/* Responsive Stil Kuralları */}
+      {/* Responsive Rules */}
       <style>{`
         @media (min-width: 768px) {
           .desktop-nav {
