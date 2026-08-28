@@ -91,6 +91,7 @@ Reading Tracker and Playoffs:<br>
 Shop & Type Matching (11 Map Zone): <br>
 fantasy, scifi, romance, horror, mystery, historical, dystopian, classics, gothic, ya (Young Adult), mythology
 
+<h2> Introduction Video ✨ </h2>
 
 
 
@@ -98,6 +99,12 @@ fantasy, scifi, romance, horror, mystery, historical, dystopian, classics, gothi
 
 
 
+
+https://github.com/user-attachments/assets/eeb779c4-25ab-4a62-b7da-1cb7ca2ca715
+
+
+
+Full video is available on my Linkedin. Check it out!
 
 
 
