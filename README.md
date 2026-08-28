@@ -97,10 +97,9 @@ fantasy, scifi, romance, horror, mystery, historical, dystopian, classics, gothi
 
 
 
+https://github.com/user-attachments/assets/f17ca187-082b-46e4-b1c0-8cc6be72d9f0
 
 
-
-https://github.com/user-attachments/assets/eeb779c4-25ab-4a62-b7da-1cb7ca2ca715
 
 
 
